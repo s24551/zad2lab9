@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    image: diamol/ch06-todo-list
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: todo
+      POSTGRES_PASSWORD: todo
+      POSTGRES_DB: tododb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  db-data:
